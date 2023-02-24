@@ -23,6 +23,7 @@ class AuthController extends Controller
         }
 
         $user = User::create([
+            'pp' => 'https://ui-avatars.com/api/?background=random&name=' . $request->name,
             'code' => strtolower(Str::random(20)),
             'name' => $request->name,
             'email' => $request->email,

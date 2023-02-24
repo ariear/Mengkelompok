@@ -16,9 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('img');
             $table->text('desc');
-            $table->integer('loves');
-            $table->string('group_id');
-            $table->foreign('group_id')->references('code')->on('groups');
+            $table->integer('loves')->default(0);
+            $table->foreignId('group_id');
             $table->foreignId('user_id');
             $table->timestamps();
         });
