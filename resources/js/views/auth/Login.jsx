@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function Login() {
+function Login({setAuthUser}) {
     const [forms, setForms] = useState({
         email: '',
         password: ''
@@ -20,6 +20,13 @@ function Login() {
         try {
             const fetch = await axios.post('/api/login', forms)
             localStorage.setItem('token', fetch.data.token)
+
+            const fetchUser = await axios.get('/api/user', {
+                headers: {
+                    Authorization: `Bearer ${fetch.data.token}`
+                }
+            })
+            setAuthUser(fetchUser.data)
             Navigate('/')
         } catch (error) {
             setIsErrors(error.response.data)
