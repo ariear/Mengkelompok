@@ -10,6 +10,8 @@ import Login from './views/auth/Login';
 import LocaleContext from './context/LocaleContext';
 import Nav from './components/Nav';
 import axios from 'axios';
+import Me from './views/Me';
+import NotFound from './views/404';
 
 const App = () => {
     const [authUser, setAuthUser] = useState(null)
@@ -68,7 +70,8 @@ const App = () => {
                 <Nav onLogoutHandler={onLogoutHandler} />
                 <Routes>
                     <Route path='/' element={<Home />} />
-                    <Route path='*' element={<Home />} />
+                    <Route path='/me' element={<Me />} />
+                    <Route path='*' element={<NotFound />} />
                 </Routes>
             </LocaleContext.Provider>
         </div>
