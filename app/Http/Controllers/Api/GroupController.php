@@ -42,6 +42,10 @@ class GroupController extends Controller
             'group_name' => $request->group_name
         ]);
 
+        DB::table('group_user')->insert([
+            ['user_id' => $request->user()->id, 'group_id' => $group->id]
+        ]);
+
         if ($group) {
             return response()->json([
                 'message' => 'Group Created',
@@ -66,9 +70,19 @@ class GroupController extends Controller
         $group = Group::firstWhere('code', $request->code);
 
         if ($group) {
+            $isJoin = DB::table('group_user')->where('user_id','=', $request->user()->id)->where('group_id','=',$group->id)->get();
+
+            if (!$isJoin->isEmpty()) {
+                return response()->json([
+                    'message' => 'Group found',
+                    'data' => $group,
+                    'isJoin' => true
+                ], 200);
+            }
             return response()->json([
                 'message' => 'Group found',
-                'data' => $group
+                'data' => $group,
+                'isJoin' => false
             ], 200);
         }
 

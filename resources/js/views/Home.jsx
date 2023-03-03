@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AddGroup from "../components/home/AddGroup";
+import SearchGroup from "../components/home/SearchGroup";
 
 function Home() {
     const [groups, setGroups] = useState([])
@@ -8,6 +9,7 @@ function Home() {
 
     const getGroup = async () => {
         setIsLoading(true)
+        setGroups([])
         const fetch = await axios.get('/api/group', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -34,25 +36,30 @@ function Home() {
                     <p>Loading...</p>
                         :
                     groups.length > 0 ?
-                        groups.map(group =>
-                            <div key={group} className="flex bg-white w-[500px] rounded-lg overflow-hidden">
-                                <img src={`/storage/${group.thumb}`} className="w-[250px]" alt="" />
-                                <div className="p-3">
-                                <p className="text-lg font-medium">{group.group_name}</p>
-                                <p className="text-sm border w-max py-2 px-5 rounded-full flex items-center"><label className="block rounded-full mr-2 w-2 border h-2 bg-blue-500"></label>{group.code}</p>
+                        <div className="flex items-center flex-wrap justify-center">
+                            {
+                            groups.map(group =>
+                                <div key={group.id} className="flex bg-white w-[500px] rounded-lg overflow-hidden m-3">
+                                    <img src={`/storage/${group.thumb}`} className="w-[250px]" alt="" />
+                                    <div className="p-3">
+                                    <p className="text-lg font-medium mb-2">{group.group_name}</p>
+                                    <p className="text-sm border w-max py-2 px-5 rounded-full flex items-center"><label className="block rounded-full mr-2 w-2 border h-2 bg-blue-500"></label>{group.code}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        )
+                            )
+                            }
+                        </div>
                             :
                         <p>Kamu belum bergabung di kelompok sama sekali njir!!</p>
             }
-            <p className="text-center mt-10 relative w-max mx-auto text-gray-400 flex items-center">
+            <SearchGroup getGroup={getGroup} />
+            <p className="text-center mt-3 relative w-max mx-auto text-gray-400 flex items-center">
                 <div className="w-20 h-1 bg-gray-400 border"></div>
                 <p className="mx-5">Atau</p>
                 <div className="w-20 h-1 bg-gray-400 border"></div>
             </p>
-            <div className="flex justify-center mt-5">
-            <AddGroup />
+            <div className="flex justify-center mt-5 mb-10">
+            <AddGroup getGroup={getGroup} />
             </div>
         </div>
     )
