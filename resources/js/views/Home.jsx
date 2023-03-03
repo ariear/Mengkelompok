@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import AddGroup from "../components/home/AddGroup";
 import SearchGroup from "../components/home/SearchGroup";
 
@@ -39,13 +40,15 @@ function Home() {
                         <div className="flex items-center flex-wrap justify-center">
                             {
                             groups.map(group =>
-                                <div key={group.id} className="flex bg-white w-[500px] rounded-lg overflow-hidden m-3">
-                                    <img src={`/storage/${group.thumb}`} className="w-[250px]" alt="" />
-                                    <div className="p-3">
-                                    <p className="text-lg font-medium mb-2">{group.group_name}</p>
-                                    <p className="text-sm border w-max py-2 px-5 rounded-full flex items-center"><label className="block rounded-full mr-2 w-2 border h-2 bg-blue-500"></label>{group.code}</p>
+                                <Link to={`/group/${group.code}`}>
+                                    <div key={group.id} className="flex bg-white w-[500px] rounded-lg overflow-hidden m-3">
+                                        <img src={`/storage/${group.thumb}`} className="w-[250px]" alt="" />
+                                        <div className="p-3">
+                                        <p className="text-lg font-medium mb-2">{group.group_name}</p>
+                                        <p className="text-sm border w-max py-2 px-5 rounded-full flex items-center"><label className="block rounded-full mr-2 w-2 border h-2 bg-blue-500"></label>{group.code}</p>
+                                        </div>
                                     </div>
-                                </div>
+                                </Link>
                             )
                             }
                         </div>

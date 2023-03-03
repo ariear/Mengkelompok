@@ -12,6 +12,7 @@ import Nav from './components/Nav';
 import axios from 'axios';
 import Me from './views/Me';
 import NotFound from './views/404';
+import Detail from './views/Detail';
 
 const App = () => {
     const [authUser, setAuthUser] = useState(null)
@@ -71,6 +72,7 @@ const App = () => {
                 <Routes>
                     <Route path='/' element={<Home />} />
                     <Route path='/me' element={<Me />} />
+                    <Route path='/group/:code' element={<Detail />} />
                     <Route path='*' element={<NotFound />} />
                 </Routes>
             </LocaleContext.Provider>
