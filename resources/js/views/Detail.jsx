@@ -1,6 +1,8 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import BtnAddPost from "../components/detail/BtnAddPost"
+import PostList from "../components/detail/PostList"
 import NotFound from "./404"
 
 function Detail() {
@@ -50,7 +52,9 @@ function Detail() {
                         <img src="/img/school.png" className="w-[220px] absolute -top-16 -right-16" alt="" />
                     </div>
             }
-            <p className="mt-3 text-lg font-medium text-gray-600">Postingan Terbaru</p>
+            <p className="my-3 text-lg font-medium text-gray-600">Postingan Terbaru</p>
+            <BtnAddPost />
+            <PostList />
         </div>
     )
 }
