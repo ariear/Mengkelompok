@@ -1,11 +1,19 @@
 import PostCard from "./PostCard"
 
-function PostList() {
+function PostList({posts, loadingPost}) {
     return (
         <div className="flex flex-wrap justify-center">
-            <PostCard />
-            <PostCard />
-            <PostCard />
+            {
+                loadingPost ?
+                    <p>Loading...</p>
+                        :
+                posts.length > 0 ?
+                posts.map(post =>
+                    <PostCard key={post.id} post={post} />
+                )
+                :
+                <p>Postingan belum tersedia</p>
+            }
         </div>
     )
 }

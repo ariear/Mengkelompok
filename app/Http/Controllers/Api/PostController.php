@@ -20,7 +20,7 @@ class PostController extends Controller
 
         $validasi = Validator::make($request->all(), [
             'title' => 'required',
-            'img' => 'required|image|mimes:png,jpg,jpeg',
+            'img' => 'required',
             'desc' => 'required'
         ]);
 
@@ -30,7 +30,7 @@ class PostController extends Controller
 
         $post = Post::create([
             'title' => $request->title,
-            'img' => $request->file('img')->store('img_post'),
+            'img' => $request->img,
             'desc' => $request->desc,
             'group_id' => $group->id,
             'user_id' => $request->user()->id
