@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('img');
+            $table->text('img');
             $table->text('desc');
             $table->integer('loves')->default(0);
             $table->foreignId('group_id');
