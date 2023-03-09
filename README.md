@@ -6,6 +6,7 @@ Sebuah website untuk mengelola berbagai kelompok anda
 Stack :
 
    -  Laravel 10
+   -  React JS
    -  Tailwind CSS
    -  Flowbite
 
