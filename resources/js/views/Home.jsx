@@ -42,7 +42,7 @@ function Home() {
                             groups.map(group =>
                                 <Link to={`/group/${group.code}`}>
                                     <div key={group.id} className="flex bg-white w-[500px] rounded-lg overflow-hidden m-3">
-                                        <img src={`/storage/${group.thumb}`} className="w-[250px]" alt="" />
+                                        <img src={`/storage/${group.thumb}`} className="w-[250px] h-[180px] object-cover" alt="" />
                                         <div className="p-3">
                                         <p className="text-lg font-medium mb-2">{group.group_name}</p>
                                         <p className="text-sm border w-max py-2 px-5 rounded-full flex items-center"><label className="block rounded-full mr-2 w-2 border h-2 bg-blue-500"></label>{group.code}</p>

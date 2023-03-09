@@ -19,15 +19,19 @@ const App = () => {
     const [initializing,setInitializing] = useState(true)
 
     const getUserLoged = async () => {
-        if (localStorage.getItem('token')) {
-            const fetch = await axios.get('/api/user', {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`
+        try {
+            if (localStorage.getItem('token')) {
+                const fetch = await axios.get('/api/user', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                if (fetch.status === 200) {
+                    setAuthUser(fetch.data)
                 }
-            })
-            if (fetch.status === 200) {
-                setAuthUser(fetch.data)
             }
+        } catch (error) {
+            console.log(error);
         }
         setInitializing(false)
     }
